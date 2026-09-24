@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Halloween 30 octobre — billetterie officielle">
+<title>Halloween 30 octobre — Billetterie</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#09060d;color:#fff}
+header{position:sticky;top:0;z-index:10;background:#0d0912eF;border-bottom:1px solid #302338;backdrop-filter:blur(8px)}
+.nav{max-width:1100px;margin:auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;color:#ff7a18;font-size:20px}.nav a{color:#ddd;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{min-height:76vh;display:grid;place-items:center;text-align:center;padding:70px 20px;background:radial-gradient(circle at 50% 25%,#4a2418 0,#1b0d1b 40%,#09060d 78%)}
+.wrap{max-width:1100px;margin:auto}.tag{display:inline-block;background:#ff7a18;color:#160a03;font-weight:900;border-radius:999px;padding:8px 14px;margin-bottom:18px}
+h1{font-size:clamp(45px,9vw,88px);line-height:.9;margin:0 0 18px}.hero p{max-width:650px;margin:0 auto 28px;color:#d0c9d5;font-size:18px;line-height:1.5}
+.btn{display:inline-block;border:0;border-radius:12px;background:#ff7a18;color:#160a03;padding:14px 22px;font-weight:900;text-decoration:none;cursor:pointer}
+section{padding:65px 20px}.title{text-align:center;font-size:36px;margin:0 0 8px}.sub{text-align:center;color:#aaa;margin:0 auto 32px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#15101a;border:1px solid #34283a;border-radius:18px;padding:25px;text-align:center}.vip{border:2px solid #ff7a18}
+.price{font-size:34px;font-weight:900;color:#ff8b3d;margin:12px 0}.card p{color:#aaa;min-height:40px}
+.box{max-width:760px;margin:auto;background:#15101a;border:1px solid #34283a;border-radius:20px;padding:26px}
+label{display:block;margin:15px 0 7px;font-weight:700}input,select{width:100%;padding:14px;border-radius:10px;border:1px solid #49394f;background:#0d0911;color:#fff;font-size:16px}
+.total{font-size:23px;font-weight:900;margin:22px 0}.note{background:#211721;border-left:4px solid #ff7a18;padding:14px;border-radius:8px;color:#cfc8d3;font-size:13px;margin-top:18px}
+.ticket{display:none;margin-top:22px;background:#0d0911;border:1px solid #49394f;border-radius:16px;padding:22px;text-align:center}.qr{width:180px;height:180px;margin:18px auto;background:#fff;color:#111;display:grid;place-items:center;border-radius:8px;padding:10px;font-size:11px;font-weight:900;word-break:break-all}
+footer{text-align:center;padding:30px 20px;color:#888;border-top:1px solid #302338}
+@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}}@media(max-width:520px){.navlinks{display:none}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">🎃 HALLOWEEN 30</div><div class="navlinks"><a href="#billets">Billets</a><a href="#acheter">Acheter</a><a href="#infos">Infos</a></div></div></header>
+
+<main>
+<section class="hero">
+<div>
+<span class="tag">30 OCTOBRE • SOIRÉE HALLOWEEN</span>
+<h1>HALLOWEEN<br>30 OCTOBRE</h1>
+<p>Réserve ton billet pour une soirée costumée. Choisis ton tarif et génère ton billet de démonstration.</p>
+<a class="btn" href="#acheter">🎟️ Acheter un billet</a>
+</div>
+</section>
+
+<section id="billets">
+<div class="wrap">
+<h2 class="title">Tarifs</h2><p class="sub">Prix en dollars canadiens.</p>
+<div class="cards">
+<div class="card"><h3>👧 Fille</h3><div class="price">15 $</div><p>Entrée standard</p><a class="btn" href="#acheter">Choisir</a></div>
+<div class="card"><h3>👦 Garçon</h3><div class="price">20 $</div><p>Entrée standard</p><a class="btn" href="#acheter">Choisir</a></div>
+<div class="card vip"><h3>⭐ VIP</h3><div class="price">35 $</div><p>Entrée VIP</p><a class="btn" href="#acheter">Choisir</a></div>
+<div class="card"><h3>💑 Couple</h3><div class="price">40 $</div><p>Billet pour 2 personnes</p><a class="btn" href="#acheter">Choisir</a></div>
+</div></div>
+</section>
+
+<section id="acheter">
+<div class="wrap">
+<h2 class="title">Acheter mon billet</h2>
+<p class="sub">Remplis tes informations pour créer un billet de démonstration.</p>
+<div class="box">
+<label for="type">Type de billet</label>
+<select id="type" onchange="updateTotal()">
+<option value="15">Fille — 15 $</option><option value="20">Garçon — 20 $</option><option value="35">VIP — 35 $</option><option value="40">Couple — 40 $</option>
+</select>
+<label for="qty">Quantité</label><input id="qty" type="number" min="1" value="1" onchange="updateTotal()">
+<label for="name">Nom complet</label><input id="name" autocomplete="name" placeholder="Ton nom">
+<label for="email">Courriel</label><input id="email" type="email" autocomplete="email" placeholder="ton@email.com">
+<div class="total">Total : <span id="total">15 $</span></div>
+<button class="btn" style="width:100%" onclick="generateTicket()">🎟️ Générer mon billet</button>
+<div id="ticket" class="ticket">
+<h3>🎃 Billet Halloween — Démo</h3>
+<p id="ticketName"></p><p id="ticketType"></p><p id="ticketTotal" class="price"></p>
+<div id="qr" class="qr"></div>
+<p style="color:#888;font-size:12px">QR code de démonstration — non valide pour une entrée réelle.</p>
+</div>
+<div class="note">🔒 Cette version est prête pour GitHub Pages, mais elle ne traite pas encore de vrais paiements. Ne saisis aucune vraie information bancaire ici.</div>
+</div></div>
+</section>
+
+<section id="infos"><div class="wrap"><h2 class="title">Infos</h2><p class="sub">📅 30 octobre • 🎭 Soirée costumée • 📍 Lieu à confirmer</p></div></section>
+</main>
+
+<footer>© 2026 Halloween 30 — Billetterie</footer>
+
+<script>
+function updateTotal(){
+ const p=Number(document.getElementById("type").value);
+ const q=Math.max(1,Number(document.getElementById("qty").value)||1);
+ document.getElementById("total").textContent=(p*q)+" $";
+}
+function generateTicket(){
+ const name=document.getElementById("name").value.trim();
+ const email=document.getElementById("email").value.trim();
+ if(!name||!email){alert("Entre ton nom et ton courriel.");return}
+ const s=document.getElementById("type");
+ const type=s.options[s.selectedIndex].text;
+ const q=Math.max(1,Number(document.getElementById("qty").value)||1);
+ const total=Number(s.value)*q;
+ const code="HALLOWEEN30-"+Math.random().toString(36).slice(2,10).toUpperCase();
+ document.getElementById("ticketName").textContent="Nom : "+name;
+ document.getElementById("ticketType").textContent=type+" × "+q;
+ document.getElementById("ticketTotal").textContent="Total : "+total+" $";
+ document.getElementById("qr").textContent=code;
+ document.getElementById("ticket").style.display="block";
+ document.getElementById("ticket").scrollIntoView({behavior:"smooth",block:"center"});
+}
+</script>
+</body>
+</html>
